@@ -162,6 +162,7 @@ if ndims(img) == 3
     img_gray = double(rgb2gray(img));
     img_gray = img_gray / max(img_gray(:));
 else
+    % invert and normalize greyscale image
     img_gray = double(img);
     img_gray = imcomplement(img_gray / max(img_gray(:)));
 end
@@ -244,8 +245,8 @@ switch params.hist_grid_det_method
 end
 
 %% horizontal/vertical histogram estimation per patch
-% grid_spacing_hor_all_seg = zeros(1, size(segments_stacked, 3));
-% grid_spacing_ver_all_seg = zeros(1, size(segments_stacked, 3));
+grid_spacing_hor_all_seg = zeros(1, size(segments_stacked, 3));
+grid_spacing_ver_all_seg = zeros(1, size(segments_stacked, 3));
 peak_amps_hor = [];
 peak_gaps_hor = [];
 peak_amps_ver = [];
