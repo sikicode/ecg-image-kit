@@ -17,13 +17,13 @@ close all FORCE
 clc
 
 % Define the path to the folder containing ECG image segments
-data_path = '../../sample-data/ecg-images/sample-segments/';
+data_path = './images/';
 
 % Get a list of all files in the image folder
 all_files = dir(fullfile(data_path, '*.*'));
 
 % Loop over all files, reading and processing each image
-for k = 1 : length(all_files)
+for k = 3 : length(all_files)
     file_name = all_files(k).name;
     image_fname = fullfile(data_path, filesep, file_name);
     

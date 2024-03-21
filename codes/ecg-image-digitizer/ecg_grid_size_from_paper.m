@@ -1,6 +1,4 @@
 function [coarse_grid_res, fine_grid_res] = ecg_grid_size_from_paper(img, paper_width, unit)
-% ecg_grid_size_from_paper - Estimates the size of the standard ECG coarse
-% grid on a given image, based on a given ECG with
 %
 % This function calculates the grid size of an ECG image based on the physical 
 % dimensions (width) of the paper. The function assumes a standard ECG grid size

@@ -328,8 +328,7 @@ else % indirect method (cluster the local peaks)
 
 end
 
-%{
-% plots used during development
+%% plots used during development
 if params.detailed_plots > 1
     figure
     hold on
@@ -353,7 +352,6 @@ if params.detailed_plots > 1
 end
 grid_size_hor = median(grid_spacing_hor_all_seg, 'omitnan');
 grid_size_ver = median(grid_spacing_ver_all_seg, 'omitnan');
-%}
 
 %% Plot results
 if params.detailed_plots > 0

@@ -11,13 +11,13 @@ clear
 close all FORCE
 clc
 
-data_path = '../../sample-data/ecg-images/';
+data_path = './images/';
 
 % Get a list of all files in the image folder.
 all_files = dir(fullfile(data_path, '*.*'));
 
 % Loop over all files, reading them in
-for k = 1 : length(all_files)
+for k = 3 : length(all_files)
     file_name = all_files(k).name;
     image_fname = fullfile(data_path, filesep, file_name);
     try
@@ -27,6 +27,7 @@ for k = 1 : length(all_files)
         paper_size = [11.0, 8.5];
         [coarse_grid_size_paper_based, fine_grid_size_paper_based] = ecg_grid_size_from_paper(img, paper_size(1), 'in');
 
+        
         %% Marginal distribution-based method
         % Setting all the parameters for ecg_gridest_margdist function
         params_margdist = struct;
@@ -50,9 +51,9 @@ for k = 1 : length(all_files)
         params_margdist.max_clusters = 3; % Maximum number of clusters to consider in k-means clustering
         params_margdist.cluster_selection_method = 'GAP_MIN_VAR'; % Method for selecting clusters ('GAP_MIN_VAR' or 'MAX_AMP_PEAKS')
         params_margdist.avg_quartile = 50.0; % The middle quartile used for averaging the estimated grid gaps
-        params_margdist.detailed_plots = 1; % Flag to enable or disable detailed plotting (0 for none, 1 for end results, 2 for all figures)
-        [gridsize_hor_margdist, gridsize_ver_margdist, grid_spacings_hor, grid_spacing_ver] = ecg_gridest_margdist(img, params_margdist);
-
+        params_margdist.detailed_plots = 1; % Flag to enable or disable detailed plotting (0 for none, 1 for end results, 2 for all figures
+        %[gridsize_hor_margdist, gridsize_ver_margdist, grid_spacings_hor, grid_spacing_ver] = ecg_gridest_margdist(img, params_margdist);
+        
         %% Spectral-based method
         % Setting all the parameters for ecg_gridest_margdist function
         params_spectral = struct;
@@ -88,8 +89,8 @@ for k = 1 : length(all_files)
         disp(['Grid resolution estimate per 0.1mV x 40ms (paper size-based): ', num2str(fine_grid_size_paper_based) ' pixels'])
         disp(['Grid resolution estimates per 0.1mV x 40ms (matched filter-based): [', num2str(grid_sizes_matchedfilt) '] pixels'])
 
-        disp(['Horizontal grid resolution estimate (margdist): ', num2str(gridsize_hor_margdist) ' pixels'])
-        disp(['Vertical grid resolution estimate (margdist): ', num2str(gridsize_ver_margdist) ' pixels'])
+        %disp(['Horizontal grid resolution estimate (margdist): ', num2str(gridsize_hor_margdist) ' pixels'])
+        %disp(['Vertical grid resolution estimate (margdist): ', num2str(gridsize_ver_margdist) ' pixels'])
 
         disp(['Horizontal grid resolution estimate (spectral): [', num2str(gridsize_hor_spectral) '] pixels'])
         disp(['Vertical grid resolution estimate (spectral): [', num2str(gridsize_ver_spectral) '] pixels'])
@@ -101,6 +102,6 @@ for k = 1 : length(all_files)
 
         close all
     catch
-        % error(['image file ', image_fname, ' not found or readable by imread']);
+        error(['image file ', image_fname, ' not found or readable by imread']);
     end
 end
