@@ -79,20 +79,18 @@ def get_parser():
 def run(args):
     random.seed(args.seed)
 
-    if os.path.isabs(args.input_directory) == False:
+    if not os.path.isabs(args.input_directory):
         args.input_directory = os.path.normpath(os.path.join(os.getcwd(), args.input_directory))
-    if os.path.isabs(args.output_directory) == False:
+    if not os.path.isabs(args.output_directory):
         original_output_dir = os.path.normpath(os.path.join(os.getcwd(), args.output_directory))
     else:
         original_output_dir = args.output_directory
 
     if os.path.exists(args.input_directory) == False or os.path.isdir(args.input_directory) == False:
-        # print(os.path.exists(args.input_directory))
-        # print(os.path.isdir(args.input_directory))
         os.stat(args.input_directory)
         raise Exception("The input directory does not exist, Please re-check the input arguments!")
 
-    if os.path.exists(original_output_dir) == False:
+    if not os.path.exists(original_output_dir):
         os.makedirs(original_output_dir)
 
     i = 0
@@ -108,8 +106,6 @@ def run(args):
         folder_struct_list = full_header_file.split('/')[:-1]
         args.output_directory = os.path.join(original_output_dir, '/'.join(folder_struct_list))
 
-        # print("args from batch input:")
-        # print(args)
         i += run_single_file(args)
 
         if args.num_images != -1 and i >= args.num_images:

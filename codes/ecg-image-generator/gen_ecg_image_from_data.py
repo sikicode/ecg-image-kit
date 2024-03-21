@@ -127,8 +127,6 @@ def run_single_file(args):
     else:
         standard_colours = False
 
-    #print("args from single file")
-    #print(args.noise)
     out_array = get_paper_ecg(input_file=filename, header_file=header, output_directory=args.output_directory,
                               start_index=args.start_index,
                               store_configs=False, papersize=papersize, add_lead_names=lead,
