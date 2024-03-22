@@ -51,7 +51,6 @@ for k = 1 : length(all_files)
         imshow(img)
 
         plot(nn, img_height - z0, 'linewidth', 3); lgnd = cat(2, lgnd, {'max_finder'});
-        hold on
         plot(nn, img_height - z1, 'linewidth', 3); lgnd = cat(2, lgnd, {'hor_smoothing'});
         plot(nn, img_height - z2, 'linewidth', 3); lgnd = cat(2, lgnd, {'all_left_right_neighbors'});
         plot(nn, img_height - z3, 'linewidth', 3); lgnd = cat(2, lgnd, {'combined_all_neighbors'});
