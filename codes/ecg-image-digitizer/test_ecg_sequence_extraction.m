@@ -20,10 +20,10 @@ clc
 data_path = './images/';
 
 % Get a list of all files in the image folder
-all_files = dir(fullfile(data_path, '*.*'));
+all_files = dir(fullfile(data_path, '*.png'));
 
 % Loop over all files, reading and processing each image
-for k = 3 : length(all_files)
+for k = 1 : length(all_files)
     file_name = all_files(k).name;
     image_fname = fullfile(data_path, filesep, file_name);
     
@@ -49,8 +49,9 @@ for k = 3 : length(all_files)
         % Display the original image and overlay the extracted sequences
         figure
         imshow(img)
-        hold on
+
         plot(nn, img_height - z0, 'linewidth', 3); lgnd = cat(2, lgnd, {'max_finder'});
+        hold on
         plot(nn, img_height - z1, 'linewidth', 3); lgnd = cat(2, lgnd, {'hor_smoothing'});
         plot(nn, img_height - z2, 'linewidth', 3); lgnd = cat(2, lgnd, {'all_left_right_neighbors'});
         plot(nn, img_height - z3, 'linewidth', 3); lgnd = cat(2, lgnd, {'combined_all_neighbors'});
@@ -58,7 +59,7 @@ for k = 3 : length(all_files)
         plot(nn, img_height - z_combined, 'linewidth', 3); lgnd = cat(2, lgnd, {'combined methods'});
         
         % Add legend and title
-        legend(lgnd, 'interpreter', 'none');
+        %legend(lgnd, 'interpreter', 'none');
         title(['Paper ECG vs recovered signal for: ', file_name]);
         set(gca, 'fontsize', 14)
         
