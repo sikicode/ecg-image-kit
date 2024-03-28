@@ -20,7 +20,7 @@ clc
 data_path = './images/';
 
 % Get a list of all files in the image folder
-all_files = dir(fullfile(data_path, '*.png'));
+all_files = dir(fullfile(data_path, '1.png'));
 
 % Loop over all files, reading and processing each image
 for k = 1 : length(all_files)
@@ -30,6 +30,8 @@ for k = 1 : length(all_files)
     try
         % Read the image
         img = imread(image_fname);
+
+        [img,rect] = imcrop(img);
 
         % Apply different sequence extraction methods to the image
         z0 = image_to_sequence(img, 'dark-foreground', 'max_finder', [], false);
