@@ -34,8 +34,8 @@ def get_paper_ecg(input_file, header_file, output_directory, seed, add_dc_pulse,
     head, tail = os.path.split(full_header_file)
 
     output_header_file = os.path.join(output_directory, tail)
-    #with open(output_header_file, 'w') as f:
-    #    f.write('\n'.join(full_lines))
+    with open(output_header_file, 'w') as f:
+       f.write('\n'.join(full_lines))
 
     # Load the full-lead recording file, extract the lead data, and save the reduced-lead recording file.
     recording = load_recording(full_recording_file, full_header, key)
